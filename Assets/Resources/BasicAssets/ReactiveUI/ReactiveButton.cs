@@ -15,16 +15,13 @@ public class ReactiveButton : MonoBehaviour {
 	
 	}
 	public void joinMap(){
-		//GetComponent<destroyMe>.enabled = false;
-		Terrain.Instantiate(terr, new Vector3(0, 0, 0), Quaternion.identity);
+		destroyMe.SetActive(false);
+		Terrain addedTerr = Terrain.Instantiate(terr, new Vector3(0, 0, 0), Quaternion.identity) as Terrain;
+		Vector3 fpsSpawn = addedTerr.GetComponent<GameMap>().getRandomSpawnPoint();
 		GameObject fps = Instantiate (
 			Resources.Load(fpsLoc, typeof(GameObject)),
-			new Vector3(0, 50, 0),
+			fpsSpawn,
 			Quaternion.identity
 		) as GameObject;
-		//, new Vector3(0, 50, 0), Quaternion.identity
-		//Instantiate(BasicMap, new Vector3(0, 0, 0), Quaternion.identity);
-		object spawnPoints = terr.GetComponent<GameMap>().spawnPoints;
-		Debug.Log (spawnPoints);
 	}
 }
